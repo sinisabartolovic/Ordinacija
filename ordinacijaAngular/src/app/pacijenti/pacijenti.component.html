@@ -1,0 +1,50 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dodajPacijentaModal">
+    Dodaj novog pacijenta
+</button>
+
+<div class="modal modal fade in" tabindex="-1" role="dialog" id="dodajPacijentaModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Dodaj pacijenta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closePacijentiModalBtn>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form (ngSubmit)="dodajPacijenta(formDodajPacijenta)" #formDodajPacijenta="ngForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="ime" class="control-label required">Ime pacijenta</label>
+                <input type="text" id="ime" name="ime" class="form-control" ngModel required #imeCtrl="ngModel">
+                <span class="help-block" *ngIf="imeCtrl.invalid && imeCtrl.touched">Molimo upišite ime!</span>
+              </div>
+              <div class="form-group">
+                <label for="prezime" class="control-label required">Prezime pacijenta</label>
+                <input type="text" id="prezime" name="prezime" class="form-control" ngModel required #prezimeCtrl="ngModel">
+                <span class="help-block" *ngIf="prezimeCtrl.invalid && prezimeCtrl.touched">Molimo upišite prezime!</span>
+              </div>
+              <div class="form-group">
+                <label for="datumRodenja" class="control-label required">Datum rođenja</label>
+                <input type="date" date="MM-dd-yyyy" id="datumRodenja" name="datumRodenja" class="form-control" ngModel required #datumRodenjaCtrl="ngModel">
+                <span class="help-block" *ngIf="datumRodenjaCtrl.invalid && datumRodenjaCtrl.touched">Molimo upišite datum rođenja!</span>
+              </div>
+              <div class="form-group">
+                <label for="adresa" class="control-label required">Adresa</label>
+                <input type="text" name="adresa" id="adresa" class="form-control" ngModel required #adresaCtrl="ngModel">
+                <span class="help-block" *ngIf="adresaCtrl.invalid && adresaCtrl.touched">Molimo upišite adresu!</span>
+              </div>
+              <div class="form-group">
+                <label for="telefon">Telefon</label>
+                <input type="tel" name="telefon" id="telefon" class="form-control" ngModel>
+              </div>
+             </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+            <button type="submit" class="btn btn-primary" [disabled]="formDodajPacijenta.invalid">Spremi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <app-pacijenti-list></app-pacijenti-list>

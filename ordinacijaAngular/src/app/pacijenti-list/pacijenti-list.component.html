@@ -1,0 +1,71 @@
+<hr>
+<div class="table-responsive-vertical shadow-z-1">
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Datum rođenja</th>
+          <th>Adresa</th>
+          <th>Telefon</th>
+          <th>Uređivanje</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let pacijent of pacijenti">
+              <td data-title="Ime">{{pacijent.Ime}}</td>
+              <td data-title="Prezime">{{pacijent.Prezime}}</td>
+              <td data-title="Datum rođenja">{{pacijent.DatumRodenja | date:'dd.MM.yyyy.'}}</td>
+              <td data-title="Adresa">{{pacijent.Adresa}}</td>
+              <td data-title="Telefon">{{pacijent.Telefon}}</td>
+              <td data-title="Uredivanje"><button type="button" class="btn btn-primary" data-toggle="modal"
+              data-target="#urediPacijentaModal" (click)="openModal(pacijent)"> Uredi </button></td>
+            </tr>
+      </tbody>
+      </table>
+    </div>
+
+    <div [ngStyle]="{'display':display}" class="modal modal fade in" tabindex="-1" role="dialog" id="urediPacijentaModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Dodaj pacijenta</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closePacijentiModalBtn>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form (ngSubmit)="spremiPacijenta(formUrediPacijenta)" #formUrediPacijenta="ngForm">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="ime" class="control-label required">Ime pacijenta</label>
+                    <input type="text" id="ime" name="ime" class="form-control" ngModel [value]="pacijent.Ime" required #imeCtrl="ngModel">
+                    <span class="help-block" *ngIf="imeCtrl.invalid && prezimeCtrl.touched">Molimo upišite ime!</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="prezime" class="control-label required">Prezime pacijenta</label>
+                    <input type="text" id="prezime" name="prezime" class="form-control" ngModel [value]="pacijent.Prezime" required #prezimeCtrl="ngModel">
+                    <span class="help-block" *ngIf="prezimeCtrl.invalid && prezimeCtrl.touched">Molimo upišite prezime!</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="datumRodenja" class="control-label required">Datum rođenja</label>
+                    <input type="date" date="MM-dd-yyyy" id="datumRodenja" name="datumRodenja" class="form-control" ngModel [value]="pacijent.DatumRodenja" required #datumRodenjaCtrl="ngModel">
+                    <span class="help-block" *ngIf="datumRodenjaCtrl.invalid && datumRodenjaCtrl.touched">Molimo upišite datum rođenja!</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="adresa" class="control-label required">Adresa</label>
+                    <input type="text" name="adresa" id="adresa" class="form-control" ngModel [value]="pacijent.Adresa" required #adresaCtrl="ngModel">
+                    <span class="help-block" *ngIf="adresaCtrl.invalid && adresaCtrl.touched">Molimo upišite adresu!</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="telefon">Telefon</label>
+                    <input type="tel" name="telefon" id="telefon" class="form-control" ngModel [value]="pacijent.Telefon">
+                  </div>
+                 </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Zatvori</button>
+                <button type="submit" class="btn btn-primary" [disabled]="formUrediPacijenta.invalid">Spremi</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
