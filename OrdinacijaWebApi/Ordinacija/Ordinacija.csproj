@@ -118,6 +118,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PacijentController.cs" />
     <Compile Include="Controllers\RezervacijaController.cs" />
+    <Compile Include="Controllers\ZahvatController.cs" />
     <Compile Include="DataAccess\DbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -27,7 +27,8 @@
             ],
             "scripts": [
               "../ordinacijaAngular/node_modules/jquery/dist/jquery.min.js",
-              "../ordinacijaAngular/node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "../ordinacijaAngular/node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "../ordinacijaAngular/node_modules/alertifyjs/build/alertify.min.js"
             ]
           },
           "configurations": {

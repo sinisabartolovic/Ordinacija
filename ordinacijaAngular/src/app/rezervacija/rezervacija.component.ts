@@ -15,12 +15,9 @@ export class RezervacijaComponent implements OnInit {
   sve = [];
   sveRezervacije: Rezervacija [] ;
   calendarOptions: Options;
-  rezervacijaService: RezervacijaService;
 
   // @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(rezervacijaService: RezervacijaService) {
-   this.rezervacijaService = rezervacijaService;
-   }
+  constructor(private rezervacijaService: RezervacijaService) {}
 
   ngOnInit() {
     this.rezervacijaService.getAllRezervacija().subscribe((rez: Rezervacija[]) => {
@@ -31,7 +28,7 @@ export class RezervacijaComponent implements OnInit {
       contentHeight: 'auto',
       noEventsMessage: 'Nema zakazanih termina',
       events: this.sveRezervacije ,
-      editable: true,
+      editable: false,
       eventLimit: false,
       defaultView: 'agendaDay',
       locale: 'hr-HR',
@@ -50,7 +47,7 @@ export class RezervacijaComponent implements OnInit {
 });
 }
 eventClick(model: any) {
-  alert(model.event.id);
+  alert('Treba implementirati potvrdu rezervacije na klik ' + model.event.title);
 }
 
 }

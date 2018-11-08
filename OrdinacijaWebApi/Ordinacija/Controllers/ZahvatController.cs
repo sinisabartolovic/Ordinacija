@@ -13,44 +13,44 @@ using Ordinacija.DataAccess;
 
 namespace Ordinacija.Controllers
 {
-    public class PacijentController : ApiController
+    public class ZahvatController : ApiController
     {
         private DataAccess.DbModel db = new DataAccess.DbModel();
 
-        // GET: api/Pacijent
-        public IQueryable<Pacijent> GetPacijent()
+        // GET: api/Zahvat
+        public IQueryable<Zahvat> GetZahvat()
         {
-            return db.Pacijent;
+            return db.Zahvat;
         }
 
-        // GET: api/Pacijent/5
-        [ResponseType(typeof(Pacijent))]
-        public async Task<IHttpActionResult> GetPacijent(int id)
+        // GET: api/Zahvat/5
+        [ResponseType(typeof(Zahvat))]
+        public async Task<IHttpActionResult> GetZahvat(int id)
         {
-            Pacijent pacijent = await db.Pacijent.FindAsync(id);
-            if (pacijent == null)
+            Zahvat zahvat = await db.Zahvat.FindAsync(id);
+            if (zahvat == null)
             {
                 return NotFound();
             }
 
-            return Ok(pacijent);
+            return Ok(zahvat);
         }
 
-        // PUT: api/Pacijent/5
+        // PUT: api/Zahvat/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutPacijent(int id, Pacijent pacijent)
+        public async Task<IHttpActionResult> PutZahvat(int id, Zahvat zahvat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != pacijent.PacijentID)
+            if (id != zahvat.ZahvatId)
             {
                 return BadRequest();
             }
 
-            db.Entry(pacijent).State = EntityState.Modified;
+            db.Entry(zahvat).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace Ordinacija.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PacijentExists(id))
+                if (!ZahvatExists(id))
                 {
                     return NotFound();
                 }
@@ -71,21 +71,20 @@ namespace Ordinacija.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Pacijent
-        [ResponseType(typeof(Pacijent))]
-        public async Task<IHttpActionResult> PostPacijent(Pacijent pacijent)
+        // POST: api/Zahvat
+        [ResponseType(typeof(Zahvat))]
+        public async Task<IHttpActionResult> PostZahvat(Zahvat zahvat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Pacijent.Add(pacijent);
+            db.Zahvat.Add(zahvat);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = pacijent.PacijentID }, pacijent);
+            return CreatedAtRoute("DefaultApi", new { id = zahvat.ZahvatId }, zahvat);
         }
-
 
         protected override void Dispose(bool disposing)
         {
@@ -96,9 +95,9 @@ namespace Ordinacija.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PacijentExists(int id)
+        private bool ZahvatExists(int id)
         {
-            return db.Pacijent.Count(e => e.PacijentID == id) > 0;
+            return db.Zahvat.Count(e => e.ZahvatId == id) > 0;
         }
     }
 }

@@ -8,10 +8,8 @@ import { RezervacijaService } from '../shared/rezervacija.service';
 })
 export class NovaRezervacijaComponent implements OnInit {
 
-  rezervacijaService: RezervacijaService;
 
-  constructor(rezervacijaService: RezervacijaService) {
-    this.rezervacijaService = rezervacijaService;
+  constructor(private rezervacijaService: RezervacijaService) {
    }
 
   ngOnInit() {

@@ -1,0 +1,22 @@
+<span (click)="addNewZahvat()" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle"></i>&nbsp; Dodaj novi zahvat </span>
+<hr>
+<div class="table-responsive">
+    <table id="mytable" class="table table-bordred table-striped">
+      <thead>
+        <th>Naziv</th>
+        <th>Cijena</th>
+        <th>Šifra</th>
+        <th>Trajanje</th>
+        <th>Uredi</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of zahvati">
+          <td>{{item.Naziv}}</td>
+          <td>{{item.Cijena}} kn</td>
+          <td>{{item.Sifra}}</td>
+          <td>{{item.Trajanje}} min</td>
+          <td><span><i class="fa fas fa-edit hoverHand" (click)="editZahvat(item.ZahvatId)"></i></span></td>
+        </tr>
+      </tbody>
+    </table>
+

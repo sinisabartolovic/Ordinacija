@@ -11,7 +11,8 @@ namespace Ordinacija.DataAccess
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Zahvat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,13 @@ namespace Ordinacija.DataAccess
         }
     
         public int ZahvatId { get; set; }
+        [Required(ErrorMessage = "Šifra je obavezna!")]
         public string Sifra { get; set; }
+        [Required(ErrorMessage = "Naziv je obavezn!")]
         public string Naziv { get; set; }
+        [Required(ErrorMessage = "Cijena je obavezna!")]
         public decimal Cijena { get; set; }
+        [Required(ErrorMessage = "Trajanje je obavezno!")]
         public int Trajanje { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

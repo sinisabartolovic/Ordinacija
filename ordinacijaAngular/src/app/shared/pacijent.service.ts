@@ -2,31 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pacijent } from './pacijent.model';
 import { environment } from 'src/environments/environment';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacijentService {
   baseUrl = environment.apiUrl;
-  promjena = new Subject<void>();
+  idEmitter = new BehaviorSubject<number>(0);
 
   constructor(private httpClient: HttpClient) { }
 
-  upisPacijenta(noviPacijent: Pacijent) {
-    return this.httpClient.post(this.baseUrl + 'Pacijent/', noviPacijent)
-    .subscribe(
-        (transformedData: any) => {
-            // Use your response data here
-            console.log(transformedData);
-            this.promjena.next();
-        }
-    );
+  dodajPacijenta(noviPacijent: Pacijent) {
+    return this.httpClient.post(this.baseUrl + 'Pacijent/', noviPacijent);
   }
   getAllPacijent() {
     return this.httpClient.get<Pacijent[]>(this.baseUrl + 'Pacijent/');
   }
-  updatePacijenta(id: number, izmjenjeniPacijent: Pacijent) {
-    return this.httpClient.put(this.baseUrl + 'Pacijent/' + id, izmjenjeniPacijent);
+  getPacijent(pacijentId: number) {
+    return this.httpClient.get(this.baseUrl + 'Pacijent/' + pacijentId);
+  }
+  updatePacijent(pac: Pacijent) {
+    return this.httpClient.put(this.baseUrl + 'Pacijent/' + pac.PacijentID, pac);
+  }
+  changePostId(postId: number) {
+    this.idEmitter.next(postId);
   }
 }
